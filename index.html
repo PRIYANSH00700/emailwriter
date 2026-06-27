@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Email Writer</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#f3f4f7;
+display:flex;
+justify-content:center;
+padding:40px;
+}
+
+.container{
+width:900px;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+
+h1{
+text-align:center;
+margin-bottom:25px;
+color:#333;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+label{
+display:block;
+margin-bottom:6px;
+font-weight:bold;
+}
+
+input,select,textarea{
+width:100%;
+padding:12px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:15px;
+}
+
+textarea{
+height:120px;
+resize:vertical;
+}
+
+button{
+padding:14px;
+border:none;
+cursor:pointer;
+border-radius:8px;
+font-size:16px;
+font-weight:bold;
+transition:.3s;
+}
+
+.generate{
+background:#2563eb;
+color:white;
+}
+
+.generate:hover{
+background:#1d4ed8;
+}
+
+.copy{
+background:#10b981;
+color:white;
+}
+
+.copy:hover{
+background:#059669;
+}
+
+.buttons{
+display:flex;
+gap:15px;
+margin-top:20px;
+}
+
+.output{
+margin-top:25px;
+}
+
+.output textarea{
+height:350px;
+background:#fafafa;
+}
+
+@media(max-width:700px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.container{
+width:100%;
+}
+
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>🤖 AI Email Writer</h1>
+
+<div class="grid">
+
+<div>
+
+<label>Recipient Name</label>
+<input id="name" placeholder="John">
+
+</div>
+
+<div>
+
+<label>Subject</label>
+<input id="subject" placeholder="Project Update">
+
+</div>
+
+<div>
+
+<label>Email Type</label>
+
+<select id="type">
+
+<option>Professional</option>
+
+<option>Business</option>
+
+<option>Job Application</option>
+
+<option>Thank You</option>
+
+<option>Apology</option>
+
+<option>Follow Up</option>
+
+<option>Invitation</option>
+
+<option>Complaint</option>
+
+<option>Sales</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>Tone</label>
+
+<select id="tone">
+
+<option>Professional</option>
+
+<option>Friendly</option>
+
+<option>Formal</option>
+
+<option>Confident</option>
+
+<option>Polite</option>
+
+<option>Persuasive</option>
+
+<option>Casual</option>
+
+</select>
+
+</div>
+
+</div>
+
+<br>
+
+<label>Key Points</label>
+
+<textarea id="points"
+placeholder="Write what you want the AI to include..."></textarea>
+
+<div class="buttons">
+
+<button class="generate" onclick="generateEmail()">
+Generate Email
+</button>
+
+<button class="copy" onclick="copyEmail()">
+Copy Email
+</button>
+
+</div>
+
+<div class="output">
+
+<label>Generated Email</label>
+
+<textarea id="result"></textarea>
+
+</div>
+
+</div>
+
+<script>
+
+function generateEmail(){
+
+let name=document.getElementById("name").value || "Sir/Madam";
+
+let subject=document.getElementById("subject").value;
+
+let type=document.getElementById("type").value;
+
+let tone=document.getElementById("tone").value;
+
+let points=document.getElementById("points").value;
+
+let intro="";
+
+switch(type){
+
+case "Professional":
+intro="I hope you are doing well.";
+break;
+
+case "Business":
+intro="I hope this email finds you well.";
+break;
+
+case "Job Application":
+intro="I am writing to express my interest in the position.";
+break;
+
+case "Thank You":
+intro="Thank you for your valuable support.";
+break;
+
+case "Apology":
+intro="Please accept my sincere apologies.";
+break;
+
+case "Follow Up":
+intro="I wanted to follow up regarding our previous discussion.";
+break;
+
+case "Invitation":
+intro="It is my pleasure to invite you.";
+break;
+
+case "Complaint":
+intro="I would like to bring an issue to your attention.";
+break;
+
+case "Sales":
+intro="I would like to introduce an exciting opportunity.";
+break;
+
+}
+
+let email=
+
+`Subject: ${subject}
+
+Dear ${name},
+
+${intro}
+
+${points}
+
+I appreciate your time and consideration.
+
+Looking forward to hearing from you.
+
+Best Regards,
+
+Your Name
+
+(${tone} Tone)
+`;
+
+document.getElementById("result").value=email;
+
+}
+
+function copyEmail(){
+
+let txt=document.getElementById("result");
+
+txt.select();
+
+document.execCommand("copy");
+
+alert("Email copied!");
+
+}
+
+</script>
+
+</body>
+</html>
